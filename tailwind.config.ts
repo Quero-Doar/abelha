@@ -12,15 +12,28 @@ const config: Config = {
     extend: {
       colors: {
         pink: {
-          DEFAULT: "#FFEFEF",
-          medium: "#FFDADA",
-          dark: "#FFC6C6",
+          light: "#FFE9E9",
+          DEFAULT: "#FBCCCC",
+          darklight: "#FDAAAA",
+          dark: "#FF8989",
         },
         blue: {
-          DEFAULT: "#05C1FF",
+          light: "#97E3FB",
+          DEFAULT: "#4ED2FD",
+          dark: "#05C1FF",
         },
         gray: {
-          DEFAULT: "#F3F3F3",
+          lighter: "#FFFFFF",
+          light: "#F9F9F9",
+          DEFAULT: "#E6E6E6",
+          darklight: "#9C9C9C",
+          dark: "#EF5F5F",
+        },
+        success: {
+          DEFAULT: "#3CC74E",
+        },
+        error: {
+          DEFAULT: "#FD7A7A",
         },
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
@@ -62,15 +75,6 @@ const config: Config = {
           "4": "hsl(var(--chart-4))",
           "5": "hsl(var(--chart-5))",
         },
-      },
-      fontFamily: {
-        sans: ["var(--font-geist-sans)"],
-        mono: ["var(--font-geist-mono)"],
-      },
-      borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
       },
     },
   },
