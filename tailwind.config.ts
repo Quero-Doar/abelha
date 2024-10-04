@@ -27,7 +27,7 @@ const config: Config = {
           light: "#F9F9F9",
           DEFAULT: "#E6E6E6",
           darklight: "#9C9C9C",
-          dark: "#EF5F5F",
+          dark: "#5F5F5F",
         },
         success: {
           DEFAULT: "#3CC74E",
