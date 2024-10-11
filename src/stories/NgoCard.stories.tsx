@@ -8,16 +8,49 @@ const meta = {
   parameters: {
     layout: "centered",
   },
+  render: ({ ...props }) => (
+    <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+      {Array.from({ length: 10 }, (_, key) => (
+        <NgoCard key={key} {...props} />
+      ))}
+    </div>
+  ),
   tags: ["autodocs"],
 } satisfies Meta<typeof NgoCard>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Small: Story = {
+export const Default: Story = {
   args: {
     ngoName: "Unio",
-    category: "Animais",
-    isLiked: false
+    categories: ["Animais", "Idosos", "Crianças", "Adultos"],
+    isLiked: false,
+  },
+};
+
+export const Liked: Story = {
+  args: {
+    ngoName: "Unio",
+    categories: ["Animais", "Idosos", "Crianças"],
+    isLiked: true,
+  },
+};
+
+export const WithPicture: Story = {
+  args: {
+    ngoName: "Unio",
+    categories: ["Animais", "Idosos", "Crianças"],
+    isLiked: false,
+    picture: "https://avatars.githubusercontent.com/u/29904893?v=4",
+  },
+};
+
+export const WithPictureLiked: Story = {
+  args: {
+    ngoName: "Unio",
+    categories: ["Animais", "Idosos", "Crianças"],
+    isLiked: true,
+    picture: "https://avatars.githubusercontent.com/u/29904893?v=4",
   },
 };

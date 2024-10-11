@@ -1,27 +1,62 @@
-import { cn } from "@/lib/utils"
-import Image from "next/image"
-import { LikeIcon } from "./icons/Like"
+import { cn } from "@/lib/utils";
+import { Card, CardContent } from "./ui/card";
 
-type Props =  {
-    category: string,
-    ngoName: string,
-    isLiked: boolean,
-    picture?: string
-}
+import { Badge } from "./Badge";
+import { LikeIcon } from "./icons/Like";
 
-export const NgoCard: React.FC<Props> = ({ picture, ngoName, category }) => (
-    <div className="rounded-lg flex flex-col">
-        <div className={cn("bg-black py-20 px-32 rounded-t-lg opacity-70", { "bg-transparent p-0": picture })}>
-            <LikeIcon className="justify-self-start h-full w-full z-10 bg-gray" />
-            <Image src={picture || ""} alt={ngoName} className={cn({ hidden: !picture })} />
-        </div>
-        
-        <div className="flex flex-col justify-center items-center space-y-2 bg-gray rounded-b-lg p-4 border border-t-0 border-gray-darklight">
-            <h2 className="captalize font-medium text-xl md:text-2xl opacity-50">{ ngoName }</h2>
+type Props = {
+  categories: string[];
+  ngoName: string;
+  isLiked: boolean;
+  picture?: string;
+};
 
-            <div className="rounded-full bg-blue py-2 px-8 text-white">
-                <span>{ category }</span>
-            </div>
-        </div>
+const NgoCardHeader: React.FC<Pick<Props, "picture" | "isLiked">> = ({
+  picture,
+  isLiked,
+}) => (
+  <CardContent
+    className={cn(
+      "relative h-24 md:h-32 p-3 bg-pink border border-pink-dark border-b-0 rounded-t-lg",
+      { "bg-transparent": picture }
+    )}
+  >
+    {picture && (
+      <div
+        className="absolute inset-0 bg-cover bg-center opacity-65 rounded-t-lg"
+        style={{ backgroundImage: `url(${picture})` }}
+      />
+    )}
+
+    <div className="relative z-10">
+      <LikeIcon className="relative top-0" isFilled={isLiked} />
     </div>
-)
+  </CardContent>
+);
+
+const NgoCardFooter: React.FC<Pick<Props, "categories" | "ngoName">> = ({
+  ngoName,
+  categories,
+}) => (
+  <CardContent className="bg-gray flex flex-col items-center justify-center space-y-2 p-2 md:p-4 border border-gray-darklight border-t-0 rounded-b-lg">
+    <span className="opacity-50 text-sm md:text-2xl">{ngoName}</span>
+
+    <div className="flex space-x-2">
+      <Badge label={categories[0]} />
+      {categories.length > 1 && <Badge label={`+${categories.length - 1}`} />}
+    </div>
+  </CardContent>
+);
+
+export const NgoCard: React.FC<Props> = ({
+  picture,
+  ngoName,
+  categories,
+  isLiked,
+}) => (
+  <Card className="w-40 md:w-60">
+    <NgoCardHeader picture={picture} isLiked={isLiked} />
+
+    <NgoCardFooter ngoName={ngoName} categories={categories} />
+  </Card>
+);
