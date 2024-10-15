@@ -24,7 +24,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     ngoName: "Unio",
-    categories: ["Animais", "Idosos", "Crianças", "Adultos"],
+    categories: Array.from({ length: 10 }, () => "Idosos"),
     isLiked: false,
   },
 };

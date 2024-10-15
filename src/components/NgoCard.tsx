@@ -3,6 +3,7 @@ import { Card, CardContent } from "./ui/card";
 
 import { Badge } from "./Badge";
 import { LikeIcon } from "./icons/Like";
+import { Tooltip } from "./Tooltip";
 
 type Props = {
   categories: string[];
@@ -43,7 +44,11 @@ const NgoCardFooter: React.FC<Pick<Props, "categories" | "ngoName">> = ({
 
     <div className="flex space-x-2">
       <Badge label={categories[0]} />
-      {categories.length > 1 && <Badge label={`+${categories.length - 1}`} />}
+      {categories.length > 1 && 
+        <Tooltip content={categories.slice(1).join(", ")}>
+          <Badge label={`+${categories.length - 1}`} />
+        </Tooltip>
+      }
     </div>
   </CardContent>
 );
