@@ -9,7 +9,22 @@ const meta = {
     layout: "centered",
   },
   tags: ["autodocs"],
-  args: { onClick: fn() },
+  argTypes: {
+    label: {
+      description: "Label to be shown inside the button",
+    },
+    size: {
+      description: "Button size variations",
+    },
+    variant: {
+      description:
+        "Button background variant. If is not set, button background color is filled",
+    },
+    rounded: {
+      description:
+        "Indicate if border should be rounded full. When not set returns border rounded large",
+    },
+  },
 } satisfies Meta<typeof Button>;
 
 export default meta;

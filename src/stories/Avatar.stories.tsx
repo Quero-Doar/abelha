@@ -9,20 +9,20 @@ const meta = {
   tags: ["autodocs"],
   argTypes: {
     fallback: {
-        description: "Name to be shown in case image source is not rendered",
+      description: "Name to be shown in case image source is not rendered",
     },
     image: {
-        description: "Image source url to be rendered"
+      description: "Image source url to be rendered",
     },
     size: {
-        description: "Avatar radius size",
-        control: { type: "select" },
-        options: ["sm", "md", "lg"],
-        table: {
-            type: { summary: "string" }
-        }
-    }
-  }
+      description: "Avatar radius size",
+      control: { type: "select" },
+      options: ["sm", "md", "lg"],
+      table: {
+        type: { summary: "string" },
+      },
+    },
+  },
 } satisfies Meta<typeof Avatar>;
 
 export default meta;
@@ -32,6 +32,6 @@ export const Default: Story = {
   args: {
     fallback: "LD",
     image: "",
-    size: "sm"
+    size: "sm",
   },
 };
