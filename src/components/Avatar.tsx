@@ -25,7 +25,7 @@ export const getInitials = (fullName: string) => fullName.trim().split(" ").map(
 
 export const Avatar: React.FC<Props> = ({ fallback, image, size = "sm" }) => (
     <ShadAvatar className={variants({ size })}>
-      <AvatarImage src={image} alt={`${getInitials(fallback)} Image`} />
+      <AvatarImage src={image} alt={`${fallback} Image`} />
       <AvatarFallback>{ getInitials(fallback) }</AvatarFallback>
     </ShadAvatar>
 )
