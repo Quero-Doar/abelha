@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 
-type Props = Pick<React.SVGProps<SVGSVGElement>, "className"> & {
+type Props = React.SVGProps<SVGSVGElement> & {
   isFilled?: boolean;
 };
 
