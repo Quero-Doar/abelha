@@ -16,6 +16,20 @@ const meta = {
     </div>
   ),
   tags: ["autodocs"],
+  argTypes: {
+    categories: {
+      description: "List of categories that belongs to the given NGO",
+    },
+    isLiked: {
+      description: "Represents if the NGO is liked by the user",
+    },
+    ngoName: {
+      description: "Name to be shown inside the card",
+    },
+    picture: {
+      description: "ImageUrl to be shown as background card",
+    },
+  },
 } satisfies Meta<typeof NgoCard>;
 
 export default meta;
