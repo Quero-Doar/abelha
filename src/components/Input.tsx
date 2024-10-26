@@ -36,11 +36,8 @@ const PasswordInput: React.FC<Props> = ({ ...props }) => {
 };
 
 export const Input: React.FC<Props> = ({ label, type = "text", ...props }) => (
-  <div className="space-y-0.5">
-    <Label
-      htmlFor={type}
-      className={cn("text-xs font-normal text-pink-dark", { hidden: !label })}
-    >
+  <div className="space-y-1">
+    <Label htmlFor={type} className={cn({ hidden: !label })}>
       {label}
     </Label>
 
