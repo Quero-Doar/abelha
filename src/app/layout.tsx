@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Sen } from "next/font/google";
 import "./globals.css";
+import { Header } from "@/components/Header";
 
 const sen = Sen({
   weight: ["400", "700"],
@@ -19,7 +20,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={sen.className}>{children}</body>
+      <body className={sen.className}>
+        <header>
+          <Header />
+        </header>
+        <main>{children}</main>
+      </body>
     </html>
   );
 }
