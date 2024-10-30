@@ -24,7 +24,7 @@ const PasswordInput: React.FC<Props> = ({ ...props }) => {
         {...props}
       />
 
-      <div className="p-2 border border-l-0 rounded-lg rounded-l-none border-pink-dark flex place-self-center">
+      <div className="p-2 bg-white border border-l-0 rounded-lg rounded-l-none border-pink-dark flex place-self-center">
         {showPassword ? (
           <EyeOpen onClick={() => setShowPassword(!showPassword)} />
         ) : (
@@ -35,16 +35,21 @@ const PasswordInput: React.FC<Props> = ({ ...props }) => {
   );
 };
 
-export const Input: React.FC<Props> = ({ label, type = "text", ...props }) => (
+export const Input: React.FC<Props> = ({
+  label,
+  type = "text",
+  value = "",
+  ...props
+}) => (
   <div className="space-y-1">
     <Label htmlFor={type} className={cn({ hidden: !label })}>
       {label}
     </Label>
 
     {type == "password" ? (
-      <PasswordInput {...props} />
+      <PasswordInput {...props} value={value} />
     ) : (
-      <ShadInput type={type} {...props} />
+      <ShadInput type={type} value={value} {...props} />
     )}
   </div>
 );
