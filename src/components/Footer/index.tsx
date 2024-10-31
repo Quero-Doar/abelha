@@ -11,50 +11,56 @@ export const Footer: React.FC = () => {
   const router = useRouter();
 
   return (
-    <div className="flex flex-col p-6 justify-center items-center divide-y lg:hidden">
-      <div className="flex flex-col justify-center items-center w-full">
+    <div className="flex flex-col p-6 justify-center items-center divide-y">
+      <div className="flex flex-col justify-center items-center w-full lg:flex-row lg:justify-between lg:px-6">
         <LogoImage />
 
-        <div className="flex flex-col px-4 pt-12 justify-center items-center w-full">
-          <div className="flex flex-col text-center">
-            <span className="font-semibold">Sobre o Quero Doar</span>
+        <div className="w-full lg:w-2/5 lg:flex lg:flex-rowlg:justify-center lg:items-center">
+          <div className="flex px-4 pt-12 justify-between items-center w-full lg:pt-0">
+            <div className="flex flex-col">
+              <span className="font-semibold">Sobre o Quero Doar</span>
 
-            <div className="flex flex-col py-3">
-              <span className="font-semibold text-sm opacity-50">
-                Quem somos
-              </span>
-              <span className="font-semibold text-sm opacity-50">Contato</span>
+              <div className="flex flex-col py-3">
+                <span className="font-semibold text-sm opacity-50">
+                  Quem somos
+                </span>
+                <span className="font-semibold text-sm opacity-50">
+                  Contato
+                </span>
+              </div>
+            </div>
+
+            <div className="flex flex-col lg:pr-12">
+              <span className="font-semibold">Blog</span>
+
+              <div className="flex flex-col py-3">
+                <span className="font-semibold text-sm opacity-50">Posts</span>
+                <span className="font-semibold text-sm opacity-50">
+                  Eventos
+                </span>
+              </div>
             </div>
           </div>
 
-          <div className="flex flex-col text-center">
-            <span className="font-semibold">Blog</span>
-
-            <div className="flex flex-col py-3">
-              <span className="font-semibold text-sm opacity-50">Posts</span>
-              <span className="font-semibold text-sm opacity-50">Eventos</span>
-            </div>
+          <div className="flex flex-col p-4 space-y-4 items-center w-full lg:w-52">
+            <Button
+              label="Criar Conta"
+              onClick={() => router.push("/cadastrar")}
+              size="sm"
+              className="w-full p-5"
+            />
+            <Button
+              label="Entrar"
+              variant="outline"
+              onClick={() => router.push("/login")}
+              size="sm"
+              className="w-full p-5"
+            />
           </div>
-        </div>
-
-        <div className="flex flex-col p-4 space-y-4 items-center w-full">
-          <Button
-            label="Criar Conta"
-            onClick={() => router.push("/cadastrar")}
-            size="sm"
-            className="w-full p-5"
-          />
-          <Button
-            label="Entrar"
-            variant="outline"
-            onClick={() => router.push("/login")}
-            size="sm"
-            className="w-full p-5"
-          />
         </div>
       </div>
 
-      <div className="flex flex-col w-full p-6 justify-center items-center">
+      <div className="flex flex-col w-full p-6 justify-center items-center lg:flex-row-reverse lg:justify-between">
         <div className="flex space-x-4 p-4">
           <a href="https://www.facebook.com" target="_blank">
             <FacebookIcon />
