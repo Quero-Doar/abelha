@@ -11,7 +11,7 @@ const tabs: Record<"donator" | "ngo", string> = {
 const meta = {
   component: Tab,
   parameters: {
-    layout: "centered",
+    layout: "fullscreen",
   },
   argTypes: {
     tabs: {
@@ -31,9 +31,24 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+const TabContent: React.FC = () => (
+  <div className="w-full flex flex-col space-y-8 lg:block">
+    <h1 className="text-2xl self-center lg:place-self-center lg:pt-16 lg:text-5xl font-bold text-blue-dark">
+      Crie uma conta
+    </h1>
+  </div>
+);
+
+const sideContent: Record<string, React.ReactNode> = {
+  donator: <div>DONATOR</div>,
+  ngo: <div>NGO</div>,
+};
+
 export const Default: Story = {
   args: {
     tabs,
+    sideContent,
+    tabContent: <TabContent />,
     defaultTab: "donator",
     children: (
       <div className="p-4 flex items-center justify-center">
