@@ -16,7 +16,7 @@ export const Footer: React.FC = () => {
       <div className="flex flex-col justify-center items-center w-full lg:flex-row lg:justify-between lg:px-6">
         <LogoImage />
 
-        <div className="w-full lg:w-2/5 lg:flex lg:flex-rowlg:justify-center lg:items-center">
+        <div className="w-full lg:w-2/5 lg:flex lg:flex-row lg:justify-center lg:items-center">
           <div className="flex px-4 pt-12 justify-between items-center w-full lg:pt-0">
             <div className="flex flex-col">
               <span className="font-semibold">Sobre o Quero Doar</span>
