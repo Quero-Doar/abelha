@@ -6,6 +6,7 @@ import { LogoImage } from "../images/Logo";
 import { FacebookIcon } from "../icons/Facebook";
 import { InstagramIcon } from "../icons/Instagram";
 import { LinkedinIcon } from "../icons/Linkedin";
+import Link from "next/link";
 
 export const Footer: React.FC = () => {
   const router = useRouter();
@@ -21,12 +22,17 @@ export const Footer: React.FC = () => {
               <span className="font-semibold">Sobre o Quero Doar</span>
 
               <div className="flex flex-col py-3">
-                <span className="font-semibold text-sm opacity-50">
-                  Quem somos
-                </span>
-                <span className="font-semibold text-sm opacity-50">
-                  Contato
-                </span>
+                <Link href="/sobre">
+                  <span className="font-semibold text-sm opacity-50">
+                    Quem somos
+                  </span>
+                </Link>
+
+                <Link href="/contatos">
+                  <span className="font-semibold text-sm opacity-50">
+                    Contato
+                  </span>
+                </Link>
               </div>
             </div>
 
@@ -34,10 +40,17 @@ export const Footer: React.FC = () => {
               <span className="font-semibold">Blog</span>
 
               <div className="flex flex-col py-3">
-                <span className="font-semibold text-sm opacity-50">Posts</span>
-                <span className="font-semibold text-sm opacity-50">
-                  Eventos
-                </span>
+                <Link href="/posts">
+                  <span className="font-semibold text-sm opacity-50">
+                    Posts
+                  </span>
+                </Link>
+
+                <Link href="/eventos">
+                  <span className="font-semibold text-sm opacity-50">
+                    Eventos
+                  </span>
+                </Link>
               </div>
             </div>
           </div>
