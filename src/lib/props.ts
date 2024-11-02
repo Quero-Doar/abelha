@@ -12,3 +12,5 @@ export type FormItems = {
   data?: Record<string, string>;
   hasOnValueChangeHook?: boolean;
 };
+
+export type SvgProps = React.SVGProps<SVGSVGElement>;

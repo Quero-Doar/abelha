@@ -1,12 +1,17 @@
 import { cn } from "@/lib/utils";
 
-type Props = React.SVGProps<SVGSVGElement> & {
+import { SvgProps } from "@/lib/props";
+
+type Props = SvgProps & {
   isFilled?: boolean;
 };
 
 export const LikeIcon: React.FC<Props> = ({ isFilled, className }) => (
   <svg
-    className={cn("w-3 h-3 md:w-4 md:h-4 transition-all ease-in-out duration-1000 delay-1000", className)}
+    className={cn(
+      "w-3 h-3 md:w-4 md:h-4 transition-all ease-in-out duration-1000 delay-1000",
+      className
+    )}
     width="0"
     height="0"
     viewBox="0 0 21 20"
@@ -22,4 +27,3 @@ export const LikeIcon: React.FC<Props> = ({ isFilled, className }) => (
     />
   </svg>
 );
-

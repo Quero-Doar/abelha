@@ -1,8 +1,15 @@
-export const HamburgerMenuIcon = () => (
+import { cn } from "@/lib/utils";
+
+import { SvgProps } from "@/lib/props";
+
+export const HamburgerMenuIcon: React.FC<SvgProps> = ({
+  className,
+  ...props
+}) => (
   <svg
     width="0"
     height="0"
-    className="w-4 h-4 fill-blue stroke-blue stroke"
+    className={cn("w-4 h-4 fill-blue stroke-blue stroke", className)}
     viewBox="0 0 16 16"
     xmlns="http://www.w3.org/2000/svg"
   >
