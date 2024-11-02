@@ -14,20 +14,29 @@ const variants = cva("", {
   },
 });
 
-type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  label: string;
+type PropsBase = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: "outline";
   rounded?: "full";
   size?: "sm" | "lg";
 };
 
+type PropsWithLabel = PropsBase & { label: string; children?: never };
+
+type PropsWithChildren = PropsBase & {
+  children: React.ReactNode;
+  label?: never;
+};
+
+type Props = PropsWithLabel | PropsWithChildren;
+
 export const Button: React.FC<Props> = ({
   label,
   className,
   rounded,
+  children,
   ...props
 }) => (
   <ShadButton className={cn(variants({ rounded }), className)} {...props}>
-    {label}
+    {label ? <p>{label}</p> : children}
   </ShadButton>
 );

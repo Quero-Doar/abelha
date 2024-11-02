@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { Button } from "@/components/Button";
+import { SpinnerIcon } from "@/components/icons/Spinner";
 
 const meta = {
   component: Button,
@@ -61,4 +62,16 @@ export const Rounded: Story = {
     label: "Encontrar ONG",
     rounded: "full",
   },
+};
+
+export const WithSpinner = {
+  args: {},
+  render: () => (
+    <Button disabled>
+      <div className="flex items-center space-x-2">
+        <SpinnerIcon />
+        <p>Carregando...</p>
+      </div>
+    </Button>
+  ),
 };
