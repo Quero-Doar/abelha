@@ -1,0 +1,57 @@
+services:
+  database:
+    image: postgres:14
+    environment:
+      POSTGRES_DB: mydb
+      POSTGRES_USER: jhondoe
+      POSTGRES_PASSWORD: randompassword
+    ports:
+      - "5433:5432"
+    volumes:
+      - db:/var/lib/postgresql/data
+    networks:
+      - network
+
+  formiga:
+    depends_on:
+      - database
+    image: querodoarbrasil/formiga
+    environment:
+      DATABASE_URL: postgres://jhondoe:randompassword@database:5432/mydb?schema=public
+    ports:
+      - "4001:4001"
+    networks:
+      - network
+
+  beija-flor:
+    depends_on:
+      - database
+    image: querodoarbrasil/beija-flor
+    environment:
+      DATABASE_URL: postgres://jhondoe:randompassword@database:5432/mydb?schema=public
+    ports:
+      - "4002:4002"
+    networks:
+      - network
+
+  toupeira:
+    depends_on:
+      - database
+      - formiga
+      - beija-flor
+    image: querodoarbrasil/toupeira
+    environment:
+      FORMIGA_HOST: formiga
+      BEIJA_FLOR_HOST: beija-flor
+    ports:
+      - "4000:4000"
+    networks:
+      - network
+
+networks:
+  network:
+    driver: bridge
+
+volumes:
+  db:
+    driver: local

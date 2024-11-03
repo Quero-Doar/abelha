@@ -38,7 +38,7 @@ export const Select: React.FC<Props> = ({
       >
         <SelectTrigger className="h-full lg:w-80" isOpen={isOpen}>
           <SelectValue
-            placeholder={<span className="opacity-50">{placeholder}</span>}
+            placeholder={<span className="opacity-20 text-xs">{placeholder}</span>}
           />
         </SelectTrigger>
 
