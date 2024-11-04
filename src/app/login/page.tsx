@@ -1,7 +1,7 @@
-export default function HomePage() {
+export default function LoginPage() {
   return (
     <div className="p-8 place-items-center">
-      <div>Página de início</div>
+      <h1>Página de Login</h1>
     </div>
   );
 }

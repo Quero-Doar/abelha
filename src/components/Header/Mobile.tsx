@@ -25,15 +25,16 @@ type Props = {
 };
 
 export const HeaderMobile: React.FC<Props> = ({ contextMenu }) => {
-  const router = useRouter();
   const pathname = usePathname();
 
   return (
     <Drawer direction="right">
       <div className="text-sm shadow-lg px-8 p-4 flex justify-between items-center w-full lg:hidden">
-        <LogoImage />
+        <Link href="/">
+          <LogoImage />
+        </Link>
 
-        <DrawerTrigger>
+        <DrawerTrigger aria-label="Hamburger Trigger">
           <HamburgerMenuIcon />
         </DrawerTrigger>
       </div>
@@ -47,7 +48,7 @@ export const HeaderMobile: React.FC<Props> = ({ contextMenu }) => {
 
           <ContentContextMenu contextMenu={contextMenu} pathname={pathname} />
 
-          <ContentFooter router={router} />
+          <ContentFooter />
         </div>
       </DrawerContent>
     </Drawer>
@@ -67,50 +68,57 @@ const ContentContextMenu: React.FC<Props & { pathname: string }> = ({
   pathname,
 }) => (
   <div className="flex flex-col text-sm text-blue-dark font-medium space-y-4">
-    <Link href="/">
-      <p
-        className={cn(
-          "p-4 hover:bg-blue-dark hover:rounded-lg hover:text-white",
-          {
-            "bg-blue-dark rounded-lg text-white": pathname == "/",
-          }
-        )}
-      >
-        Início
-      </p>
-    </Link>
-
-    {Object.entries(contextMenu).map(([route, label], index) => (
-      <Link href={route} key={index}>
+    <DrawerClose asChild>
+      <Link href="/">
         <p
           className={cn(
             "p-4 hover:bg-blue-dark hover:rounded-lg hover:text-white",
             {
-              "bg-blue-dark rounded-lg text-white": pathname == route,
+              "bg-blue-dark rounded-lg text-white": pathname == "/",
             }
           )}
         >
-          {label}
+          Início
         </p>
       </Link>
+    </DrawerClose>
+
+    {Object.entries(contextMenu).map(([route, label], index) => (
+      <DrawerClose key={index} asChild>
+        <Link href={route} key={index}>
+          <p
+            className={cn(
+              "p-4 hover:bg-blue-dark hover:rounded-lg hover:text-white",
+              {
+                "bg-blue-dark rounded-lg text-white": pathname == route,
+              }
+            )}
+          >
+            {label}
+          </p>
+        </Link>
+      </DrawerClose>
     ))}
   </div>
 );
 
-const ContentFooter: React.FC<{ router: AppRouterInstance }> = ({ router }) => (
+const ContentFooter: React.FC = () => (
   <DrawerFooter className="flex flex-col space-y-4 items-center">
-    <Button
-      label="Criar Conta"
-      onClick={() => router.push("/cadastrar")}
-      size="sm"
-      className="w-full p-5"
-    />
-    <Button
-      label="Entrar"
-      variant="outline"
-      onClick={() => router.push("/login")}
-      size="sm"
-      className="w-full p-5"
-    />
+    <DrawerClose asChild>
+      <Link href="/cadastrar">
+        <Button label="Criar Conta" size="sm" className="w-full p-5" />
+      </Link>
+    </DrawerClose>
+
+    <DrawerClose asChild>
+      <Link href="/login">
+        <Button
+          label="Entrar"
+          variant="outline"
+          size="sm"
+          className="w-full p-5"
+        />
+      </Link>
+    </DrawerClose>
   </DrawerFooter>
 );
