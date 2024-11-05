@@ -1,7 +1,7 @@
-export default function HomePage() {
+export default function AboutPage() {
   return (
     <div className="p-8 place-items-center">
-      <div>Página de início</div>
+      <h1>Página Sobre</h1>
     </div>
   );
 }

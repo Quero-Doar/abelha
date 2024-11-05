@@ -9,7 +9,9 @@
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
     "test": "vitest",
-    "build-storybook": "storybook build"
+    "test:e2e": "pnpm build && pnpm run-processes \"pnpm playwright test ./tests/e2e\"",
+    "build-storybook": "storybook build",
+    "run-processes": "concurrently --kill-others --raw \"pnpm run start\"" 
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -37,6 +39,7 @@
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^1.9.0",
+    "@playwright/test": "^1.48.2",
     "@storybook/addon-essentials": "^8.3.2",
     "@storybook/addon-interactions": "^8.3.2",
     "@storybook/addon-links": "^8.3.2",
@@ -50,6 +53,7 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@vitejs/plugin-react": "^4.3.2",
+    "concurrently": "^9.0.1",
     "eslint": "^8",
     "eslint-config-next": "15.0.0-rc.0",
     "eslint-plugin-storybook": "^0.8.0",

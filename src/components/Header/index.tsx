@@ -3,8 +3,8 @@ import { HeaderMobile } from "./Mobile";
 
 const contextMenu = {
   "/sobre": "Sobre",
-  "/encontrar-ong": "Encontrar ONG's",
-  "/recomendar-ongs": "Recomendar ONG's",
+  "/encontrar-ongs": "Encontrar ONGs",
+  "/recomendar-ongs": "Recomendar ONGs",
 };
 
 export const Header = () => (
