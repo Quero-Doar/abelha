@@ -2,11 +2,8 @@ import type { Metadata } from "next";
 import { Sen } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
-<<<<<<< HEAD
 import { Footer } from "@/components/Footer";
-=======
 import { Toaster } from "@/components/ui/toaster";
->>>>>>> 2d351426b10a22da71791d9f7756a001918914b4
 
 const sen = Sen({
   weight: ["400", "700"],
@@ -33,6 +30,7 @@ export default function RootLayout({
         <footer>
           <Footer />
         </footer>
+        <Toaster />
       </body>
     </html>
   );
