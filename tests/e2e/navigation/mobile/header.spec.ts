@@ -1,16 +1,15 @@
-import { test, expect, devices } from "@playwright/test";
+import { randomUUID } from "crypto";
+import { expect } from "@playwright/test";
 
-const iPhone12 = devices["iPhone 12"];
-const iPhone13 = devices["iPhone 13"];
-const iPadPro = devices["iPad Pro 11"];
-const iPad7 = devices["iPad (gen 7)"];
-const Pixel5 = devices["Pixel 5"];
+import { test } from "@tests/fixtures";
+import { mobileDevices } from "@tests/fixtures/mobile-devices";
 
-test.use({ ...iPhone12, ...iPhone13, ...iPadPro, ...iPad7, ...Pixel5 });
+test.use(mobileDevices);
 
 test.describe("Header Navigation (Mobile)", () => {
   test("should navigate to different sections and keep the header visible", async ({
     page,
+    apiMocks,
   }) => {
     await page.goto("/");
 
@@ -32,7 +31,7 @@ test.describe("Header Navigation (Mobile)", () => {
     await expect(page.getByText("Página de início")).toBeVisible();
     await expect(header).toBeVisible();
 
-    // // Navigate to the Find Ngo page
+    // Navigate to the Find Ngo page
     await page.click('[aria-label="Hamburger Trigger"]');
     await page.getByRole("link", { name: "Encontrar ONGs" }).click();
     await expect(page).toHaveURL("/encontrar-ongs");
@@ -47,6 +46,15 @@ test.describe("Header Navigation (Mobile)", () => {
     await expect(header).toBeVisible();
 
     // Navigate to the Sign up page
+    await apiMocks.add({
+      route: "/api/categories",
+      response: {
+        status: 200,
+        body: {
+          [randomUUID()]: "Animais",
+        },
+      },
+    });
     await page.click('[aria-label="Hamburger Trigger"]');
     await page.getByRole("button", { name: "Criar Conta" }).click();
     await expect(page).toHaveURL("/cadastrar");

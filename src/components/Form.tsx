@@ -29,33 +29,25 @@ export const Form: React.FC<Props> = ({
     <ShadForm {...form}>
       <form onSubmit={form.handleSubmit(onSubmit!)} {...props}>
         <div className={"flex flex-col justify-center space-y-3"}>
-          {Object.entries(items).map(([name, item]) => (
-            <FormField
-              key={name}
-              name={name}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel htmlFor={name}>{item.label}</FormLabel>
+          {Object.entries(items).map(
+            ([name, { ItemComponent, label, data }]) => (
+              <FormField
+                key={name}
+                name={name}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel htmlFor={name}>{label}</FormLabel>
 
-                  {item.hasOnValueChangeHook ? (
                     <FormControl id={name}>
-                      <item.ItemComponent
-                        data={item.data}
-                        onValueChange={field.onChange}
-                        {...field}
-                      />
+                      <ItemComponent field={field} data={data} {...field} />
                     </FormControl>
-                  ) : (
-                    <FormControl id={name}>
-                      <item.ItemComponent data={item.data} {...field} />
-                    </FormControl>
-                  )}
 
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          ))}
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            )
+          )}
 
           <div className="flex justify-center pt-4">
             <Button

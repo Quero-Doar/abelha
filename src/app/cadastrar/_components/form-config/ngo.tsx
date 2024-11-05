@@ -8,13 +8,13 @@ const NameInput: React.FC<FormDataFieldsProps> = ({ ...props }) => (
 
 const CategorySelect: React.FC<FormDataFieldsProps> = ({
   data,
-  onValueChange,
+  field,
   ...props
 }) => (
   <Select
     placeholder="Selecione uma categoria"
     items={data!}
-    onValueChange={onValueChange}
+    onValueChange={field.onChange}
     {...props}
   />
 );
@@ -36,7 +36,6 @@ export const ngoFormItems: Record<string, FormItems> = {
   category: {
     ItemComponent: CategorySelect,
     label: "Categoria",
-    hasOnValueChangeHook: true,
   },
 
   email: {

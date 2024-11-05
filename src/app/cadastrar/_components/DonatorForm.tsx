@@ -9,6 +9,7 @@ import { Form } from "@/components/Form";
 import { donatorFormItems } from "./form-config/donator";
 import { CreateDonatorPayload } from "@/lib/schemas/donator";
 import { newDonator } from "@/server/actions/donator/create";
+import { toast } from "@/hooks/use-toast";
 
 export const DonatorForm: React.FC = () => {
   const router = useRouter();
@@ -27,9 +28,11 @@ export const DonatorForm: React.FC = () => {
       form.setError("email", { message: response.error.message });
       return;
     } else if (response.error) {
-      // TODO - create a toast component
-      alert(response.error.message);
-      return;
+      return toast({
+        variant: "destructive",
+        title: "Erro ao criar o doador",
+        description: response.error.message,
+      });
     }
 
     return router.push("/");
@@ -40,7 +43,7 @@ export const DonatorForm: React.FC = () => {
       items={donatorFormItems}
       buttonLabel="Criar Conta"
       form={form}
-      onSubmit={async (data) => onSubmit(data)}
+      onSubmit={onSubmit}
     />
   );
 };

@@ -1,4 +1,4 @@
-export class ActionException {
+export class ServerException {
   public name?: string;
 
   constructor(

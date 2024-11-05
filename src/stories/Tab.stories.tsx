@@ -47,8 +47,8 @@ const sideContent: Record<string, React.ReactNode> = {
 export const Default: Story = {
   args: {
     tabs,
-    sideContent,
-    tabContent: <TabContent />,
+    leftSideContent: sideContent,
+    rightSideContent: <TabContent />,
     defaultTab: "donator",
     children: (
       <div className="p-4 flex items-center justify-center">

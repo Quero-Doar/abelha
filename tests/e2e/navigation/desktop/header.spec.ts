@@ -1,8 +1,12 @@
-import { test, expect } from "@playwright/test";
+import { randomUUID } from "crypto";
+import { expect } from "@playwright/test";
+
+import { test } from "@tests/fixtures";
 
 test.describe("Header Navigation", () => {
   test("should navigate to different sections and keep the header visible", async ({
     page,
+    apiMocks,
   }) => {
     await page.goto("/");
 
@@ -35,6 +39,15 @@ test.describe("Header Navigation", () => {
     await expect(page.getByText("Página de recomendar ONGs")).toBeVisible();
 
     // Navigate to the Sign up page
+    await apiMocks.add({
+      route: "/api/categories",
+      response: {
+        status: 200,
+        body: {
+          [randomUUID()]: "Animais",
+        },
+      },
+    });
     await page.click("text=Criar Conta");
     await expect(page).toHaveURL("/cadastrar");
     await expect(header).toBeVisible();
