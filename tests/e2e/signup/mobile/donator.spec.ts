@@ -3,13 +3,10 @@ import { randomUUID } from "crypto";
 import { expect } from "@playwright/test";
 
 import { test } from "@tests/fixtures";
-import { mobileDevices } from "@tests/fixtures/mobile-devices";
-
-test.use(mobileDevices);
 
 test.describe("Donator Signup Journey (Mobile)", () => {
   test("should navigate to the signup page and create a account", async ({
-    page,
+    mobilePage,
     apiMocks,
   }) => {
     // Add a category to the API mocks
@@ -22,32 +19,34 @@ test.describe("Donator Signup Journey (Mobile)", () => {
     });
 
     // Navigate to the Login Page
-    await page.goto("/");
-    await page.click('[aria-label="Hamburger Trigger"]');
-    await page.getByRole("button", { name: "Criar Conta" }).click();
-    await expect(page).toHaveURL("/cadastrar");
+    await mobilePage.goto("/");
+    await mobilePage.click('[aria-label="Hamburger Trigger"]');
+    await mobilePage.getByRole("button", { name: "Criar Conta" }).click();
+    await expect(mobilePage).toHaveURL("/cadastrar");
 
     // Verifies if the selected tab is donator
-    const donatorTab = page.getByRole("tab", { name: "Sou doador" });
+    const donatorTab = mobilePage.getByRole("tab", { name: "Sou doador" });
     await donatorTab.click();
 
     await expect(donatorTab).toHaveAttribute("aria-selected", "true");
 
     // Verifies if the form is visible and if the right side content title is visible
     // and if the submit button is disabled
-    const submitButton = page
+    const submitButton = mobilePage
       .getByLabel("Sou doador")
       .getByRole("button", { name: "Criar Conta" });
 
-    await expect(page.locator("form")).toBeVisible();
+    await expect(mobilePage.locator("form")).toBeVisible();
     await expect(submitButton).toBeVisible();
 
     // Check if all inputs are avaiables
-    const nameInput = page.getByPlaceholder("Rebeca Gusmão", { exact: true });
-    const emailInput = page.getByPlaceholder("rebecagusmao@gmail.com", {
+    const nameInput = mobilePage.getByPlaceholder("Rebeca Gusmão", {
       exact: true,
     });
-    const passwordInput = page.getByPlaceholder("Senha", { exact: true });
+    const emailInput = mobilePage.getByPlaceholder("rebecagusmao@gmail.com", {
+      exact: true,
+    });
+    const passwordInput = mobilePage.getByPlaceholder("Senha", { exact: true });
 
     await expect(nameInput).toBeVisible();
     await expect(emailInput).toBeVisible();
@@ -68,6 +67,6 @@ test.describe("Donator Signup Journey (Mobile)", () => {
 
     await submitButton.click();
 
-    await expect(page).toHaveURL("/");
+    await expect(mobilePage).toHaveURL("/");
   });
 });

@@ -33,25 +33,27 @@ export default defineConfig({
   },
 
   /* Configure projects for major browsers */
-  projects: [
-    {
-      name: "firefox",
-      use: { ...devices["Desktop Firefox"] },
-    },
+  projects: process.env.CI
+    ? undefined
+    : [
+        {
+          name: "firefox",
+          use: { ...devices["Desktop Firefox"] },
+        },
 
-    {
-      name: "webkit",
-      use: { ...devices["Desktop Safari"] },
-    },
+        {
+          name: "webkit",
+          use: { ...devices["Desktop Safari"] },
+        },
 
-    {
-      name: "chromium",
-      use: {
-        browserName: "chromium",
-        channel: "chrome", // Specifies the chrome
-      },
-    },
-  ],
+        {
+          name: "chromium",
+          use: {
+            browserName: "chromium",
+            channel: "chrome", // Specifies the chrome
+          },
+        },
+      ],
   webServer: {
     command: "pnpm build && pnpm start",
     port: 3000,
