@@ -9,9 +9,10 @@
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
     "test": "vitest",
-    "test:e2e": "pnpm build && pnpm run-processes \"pnpm playwright test ./tests/e2e\"",
+    "test:integration": "playwright test ./tests/integration",
+    "test:e2e": "pnpm playwright test ./tests/e2e",
     "build-storybook": "storybook build",
-    "run-processes": "concurrently --kill-others --raw \"pnpm run start\"" 
+    "run-processes": "concurrently --kill-others --raw \"pnpm dev\""
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -26,6 +27,7 @@
     "@radix-ui/react-tooltip": "^1.1.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.445.0",
     "next": "15.0.0-rc.0",
     "react": "19.0.0-rc-f994737d14-20240522",
@@ -49,6 +51,7 @@
     "@storybook/react": "^8.3.2",
     "@storybook/test": "^8.3.2",
     "@testing-library/react": "^16.0.1",
+    "@types/jsonwebtoken": "^9.0.7",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

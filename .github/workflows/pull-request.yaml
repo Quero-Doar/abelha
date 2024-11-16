@@ -34,6 +34,8 @@ jobs:
 
       - name: Run build
         run: pnpm build
+        env:
+          SERVICE_ENV: test
 
   build-storybook:
     name: Build Storybook

@@ -1,24 +1,24 @@
 import "server-only";
 
-import z from "zod";
+import { z } from "zod";
 
 import { ServerResponse } from "../responses";
-import { ServerException } from "../exceptions";
+import { ServerException } from "@/server/exceptions";
 
-type DefineServerAction<TInputSchema extends z.ZodTypeAny, TOutput> = {
-  inputSchema: TInputSchema;
-  handler: (_args: z.infer<TInputSchema>) => Promise<TOutput>;
+type DefineServerRequest<TInputSchema extends z.ZodTypeAny, TOutput> = {
+  inputSchema?: TInputSchema;
+  handler: (_args?: z.infer<TInputSchema>) => Promise<TOutput>;
 };
 
-export function serverAction<TInputSchema extends z.ZodTypeAny, TOutput>({
+export const serverRequest = <TOutput, TInputSchema extends z.ZodTypeAny>({
   inputSchema,
   handler,
-}: DefineServerAction<TInputSchema, TOutput>) {
+}: DefineServerRequest<TInputSchema, TOutput>) => {
   return async (
-    input: z.infer<TInputSchema>
+    input?: z.infer<TInputSchema>
   ): Promise<ServerResponse<TOutput>> => {
     try {
-      const args = inputSchema.parse(input);
+      const args = inputSchema?.parse(input);
       const result = await handler(args);
 
       return {
@@ -41,4 +41,4 @@ export function serverAction<TInputSchema extends z.ZodTypeAny, TOutput>({
       }
     }
   };
-}
+};
