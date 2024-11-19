@@ -2,50 +2,47 @@ import { randomUUID } from "crypto";
 import { expect } from "@playwright/test";
 
 import { test } from "@tests/fixtures";
-import { mobileDevices } from "@tests/fixtures/mobile-devices";
-
-test.use(mobileDevices);
 
 test.describe("Header Navigation (Mobile)", () => {
   test("should navigate to different sections and keep the header visible", async ({
-    page,
+    mobilePage,
     apiMocks,
   }) => {
-    await page.goto("/");
+    await mobilePage.goto("/");
 
     // Verifies if the header is visible
-    const header = page.locator("header");
+    const header = mobilePage.locator("header");
     await expect(header).toBeVisible();
 
     // Navigate to the About section
-    await page.click('[aria-label="Hamburger Trigger"]');
-    await page.getByRole("link", { name: "Sobre" }).click();
-    await expect(page).toHaveURL("/sobre");
-    await expect(page.getByText("Página Sobre")).toBeVisible();
+    await mobilePage.click('[aria-label="Hamburger Trigger"]');
+    await mobilePage.getByRole("link", { name: "Sobre" }).click();
+    await expect(mobilePage).toHaveURL("/sobre");
+    await expect(mobilePage.getByText("Página Sobre")).toBeVisible();
     await expect(header).toBeVisible();
 
-    // Go back to the Home page
-    await page.click('[aria-label="Hamburger Trigger"]');
-    await page.getByRole("link", { name: "Início" }).click();
-    await expect(page).toHaveURL("/");
-    await expect(page.getByText("Página de início")).toBeVisible();
+    // Go back to the Home mobilePage
+    await mobilePage.click('[aria-label="Hamburger Trigger"]');
+    await mobilePage.getByRole("link", { name: "Início" }).click();
+    await expect(mobilePage).toHaveURL("/");
+    await expect(mobilePage.getByText("Página de início")).toBeVisible();
     await expect(header).toBeVisible();
 
-    // Navigate to the Find Ngo page
-    await page.click('[aria-label="Hamburger Trigger"]');
-    await page.getByRole("link", { name: "Encontrar ONGs" }).click();
-    await expect(page).toHaveURL("/encontrar-ongs");
-    await expect(page.getByText("Página de encontrar ONGs")).toBeVisible();
+    // Navigate to the Find Ngo mobilePage
+    await mobilePage.click('[aria-label="Hamburger Trigger"]');
+    await mobilePage.getByRole("link", { name: "Encontrar ONGs" }).click();
+    await expect(mobilePage).toHaveURL("/encontrar-ongs");
+    await expect(mobilePage.getByText("Página de encontrar ONGs")).toBeVisible();
     await expect(header).toBeVisible();
 
-    // Navigate to the Recommend Ngo page
-    await page.click('[aria-label="Hamburger Trigger"]');
-    await page.getByRole("link", { name: "Recomendar ONGs" }).click();
-    await expect(page).toHaveURL("/recomendar-ongs");
-    await expect(page.getByText("Página de recomendar ONGs")).toBeVisible();
+    // Navigate to the Recommend Ngo mobilePage
+    await mobilePage.click('[aria-label="Hamburger Trigger"]');
+    await mobilePage.getByRole("link", { name: "Recomendar ONGs" }).click();
+    await expect(mobilePage).toHaveURL("/recomendar-ongs");
+    await expect(mobilePage.getByText("Página de recomendar ONGs")).toBeVisible();
     await expect(header).toBeVisible();
 
-    // Navigate to the Sign up page
+    // Navigate to the Sign up mobilePage
     await apiMocks.add({
       route: "/api/categories",
       response: {
@@ -55,18 +52,18 @@ test.describe("Header Navigation (Mobile)", () => {
         },
       },
     });
-    await page.click('[aria-label="Hamburger Trigger"]');
-    await page.getByRole("button", { name: "Criar Conta" }).click();
-    await expect(page).toHaveURL("/cadastrar");
-    await expect(page.locator("form")).toBeVisible();
-    await expect(page.getByText("Crie uma conta")).toBeVisible();
+    await mobilePage.click('[aria-label="Hamburger Trigger"]');
+    await mobilePage.getByRole("button", { name: "Criar Conta" }).click();
+    await expect(mobilePage).toHaveURL("/cadastrar");
+    await expect(mobilePage.locator("form")).toBeVisible();
+    await expect(mobilePage.getByText("Crie uma conta")).toBeVisible();
     await expect(header).toBeVisible();
 
-    // Navigate to the Sign in page
-    await page.click('[aria-label="Hamburger Trigger"]');
-    await page.getByRole("button", { name: "Entrar" }).click();
-    await expect(page).toHaveURL("/login");
-    await expect(page.getByText("Página de Login")).toBeVisible();
+    // Navigate to the Sign in mobilePage
+    await mobilePage.click('[aria-label="Hamburger Trigger"]');
+    await mobilePage.getByRole("button", { name: "Entrar" }).click();
+    await expect(mobilePage).toHaveURL("/login");
+    await expect(mobilePage.getByText("Página de Login")).toBeVisible();
     await expect(header).toBeVisible();
   });
 });
