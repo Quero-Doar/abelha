@@ -1,13 +1,16 @@
-import type { Metadata } from "next";
-import { Sen } from "next/font/google";
 import "./globals.css";
+
+import { Sen } from "next/font/google";
+import type { Metadata } from "next";
+
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Toaster } from "@/components/ui/toaster";
 
 const sen = Sen({
-  weight: ["400", "700"],
+  weight: ["400", "500", "600", "700", "800"],
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
