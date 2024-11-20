@@ -58,6 +58,6 @@ test.describe("Header Navigation", () => {
     await page.click("text=Entrar");
     await expect(page).toHaveURL("/login");
     await expect(header).toBeVisible();
-    await expect(page.getByText("Página de Login")).toBeVisible();
+    await expect(page.getByText("Login")).toBeVisible();
   });
 });

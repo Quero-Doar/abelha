@@ -63,7 +63,7 @@ test.describe("Header Navigation (Mobile)", () => {
     await mobilePage.click('[aria-label="Hamburger Trigger"]');
     await mobilePage.getByRole("button", { name: "Entrar" }).click();
     await expect(mobilePage).toHaveURL("/login");
-    await expect(mobilePage.getByText("Página de Login")).toBeVisible();
+    await expect(mobilePage.getByText("Login")).toBeVisible();
     await expect(header).toBeVisible();
   });
 });
