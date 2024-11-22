@@ -12,7 +12,7 @@ type Props = {
 
 export const NgoCards: React.FC<Props> = ({ ngos }) => (
   <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-    {Object.values(ngos).map(({ id, name, categories }) => (
+    {ngos.map(({ id, name, categories }) => (
       <Card key={id} className="w-40 md:w-60">
         <NgoCardHeader picture={undefined} isLiked={false} />
 
