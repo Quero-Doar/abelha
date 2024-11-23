@@ -1,19 +1,19 @@
 import { cn } from "@/lib/utils";
 import { Card, CardContent } from "./ui/card";
+import { NgoResponse } from "@/lib/schemas/ngo";
 
 import { Badge } from "./Badge";
 import { Tooltip } from "./Tooltip";
 import { LikeIcon } from "./icons/Like";
-import { NgoResponse } from "@/lib/schemas/ngo";
 
 type Props = {
   ngos: NgoResponse[];
 };
 
 export const NgoCards: React.FC<Props> = ({ ngos }) => (
-  <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+  <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
     {ngos.map(({ id, name, categories }) => (
-      <Card key={id} className="w-40 md:w-60">
+      <Card key={id} className="w-40 md:w-52">
         <NgoCardHeader picture={undefined} isLiked={false} />
 
         <NgoCardFooter name={name} categories={categories} />
@@ -28,7 +28,7 @@ const NgoCardHeader: React.FC<{ isLiked: boolean; picture?: string }> = ({
 }) => (
   <CardContent
     className={cn(
-      "relative h-24 md:h-32 p-3 bg-pink border border-pink-dark border-b-0 rounded-t-lg",
+      "relative h-24 md:h-28 p-3 bg-pink border border-pink-dark border-b-0 rounded-t-lg",
       { "bg-transparent": picture }
     )}
   >
