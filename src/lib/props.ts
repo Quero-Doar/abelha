@@ -8,7 +8,7 @@ export type FormDataFieldsProps = ControllerRenderProps<FieldValues, string> & {
 
 export type FormItems = {
   ItemComponent: React.FC<FormDataFieldsProps>;
-  label: string;
+  label?: string;
   data?: Record<string, string>;
 };
 

@@ -36,7 +36,7 @@ export const Form: React.FC<Props> = ({
                 name={name}
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel htmlFor={name}>{label}</FormLabel>
+                    {label && <FormLabel htmlFor={name}>{label}</FormLabel>}
 
                     <FormControl id={name}>
                       <ItemComponent field={field} data={data} {...field} />
