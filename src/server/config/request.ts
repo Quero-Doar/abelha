@@ -5,9 +5,14 @@ import { z } from "zod";
 import { ServerResponse } from "../responses";
 import { ServerException } from "@/server/exceptions";
 
-type DefineServerRequest<TInputSchema extends z.ZodTypeAny, TOutput> = {
+type DefineServerRequest<
+  TInputSchema extends z.ZodTypeAny | undefined,
+  TOutput
+> = {
   inputSchema?: TInputSchema;
-  handler: (_args?: z.infer<TInputSchema>) => Promise<TOutput>;
+  handler: TInputSchema extends z.ZodTypeAny
+    ? (_args: z.infer<TInputSchema>) => Promise<TOutput>
+    : (_args?: undefined) => Promise<TOutput>;
 };
 
 export const serverRequest = <TOutput, TInputSchema extends z.ZodTypeAny>({
