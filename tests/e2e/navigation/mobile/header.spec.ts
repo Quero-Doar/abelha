@@ -18,7 +18,7 @@ test.describe("Header Navigation (Mobile)", () => {
     await mobilePage.click('[aria-label="Hamburger Trigger"]');
     await mobilePage.getByRole("link", { name: "Sobre" }).click();
     await expect(mobilePage).toHaveURL("/sobre");
-    await expect(mobilePage.getByText("Página Sobre")).toBeVisible();
+    await expect(mobilePage.getByText("Quem SomosThe largest")).toBeVisible();
     await expect(header).toBeVisible();
 
     // Go back to the Home mobilePage
@@ -29,17 +29,32 @@ test.describe("Header Navigation (Mobile)", () => {
     await expect(header).toBeVisible();
 
     // Navigate to the Find Ngo mobilePage
+    await apiMocks.add({
+      route: "/api/ngos",
+      response: {
+        status: 200,
+        body: {
+          users: [],
+          totalPages: 1,
+        },
+      },
+    });
+
     await mobilePage.click('[aria-label="Hamburger Trigger"]');
     await mobilePage.getByRole("link", { name: "Encontrar ONGs" }).click();
-    await expect(mobilePage).toHaveURL("/encontrar-ongs");
-    await expect(mobilePage.getByText("Página de encontrar ONGs")).toBeVisible();
+    await expect(mobilePage).toHaveURL("/ongs/encontrar");
+    await expect(
+      mobilePage.getByText("Encontre aqui uma ONG para Recomendar")
+    ).toBeVisible();
     await expect(header).toBeVisible();
 
     // Navigate to the Recommend Ngo mobilePage
     await mobilePage.click('[aria-label="Hamburger Trigger"]');
     await mobilePage.getByRole("link", { name: "Recomendar ONGs" }).click();
-    await expect(mobilePage).toHaveURL("/recomendar-ongs");
-    await expect(mobilePage.getByText("Página de recomendar ONGs")).toBeVisible();
+    await expect(mobilePage).toHaveURL("/ongs/recomendar");
+    await expect(
+      mobilePage.getByText("Página de recomendar ONGs")
+    ).toBeVisible();
     await expect(header).toBeVisible();
 
     // Navigate to the Sign up mobilePage
@@ -63,7 +78,7 @@ test.describe("Header Navigation (Mobile)", () => {
     await mobilePage.click('[aria-label="Hamburger Trigger"]');
     await mobilePage.getByRole("button", { name: "Entrar" }).click();
     await expect(mobilePage).toHaveURL("/login");
-    await expect(mobilePage.getByText("Página de Login")).toBeVisible();
+    await expect(mobilePage.getByText("Login")).toBeVisible();
     await expect(header).toBeVisible();
   });
 });

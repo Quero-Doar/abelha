@@ -3,7 +3,7 @@ import { Select } from "@/components/Select";
 import { FormDataFieldsProps, FormItems } from "@/lib/props";
 
 const NameInput: React.FC<FormDataFieldsProps> = ({ ...props }) => (
-  <Input id="name" placeholder="UNIO" {...props} />
+  <Input placeholder="UNIO" {...props} />
 );
 
 const CategorySelect: React.FC<FormDataFieldsProps> = ({
@@ -20,7 +20,7 @@ const CategorySelect: React.FC<FormDataFieldsProps> = ({
 );
 
 const PasswordInput: React.FC<FormDataFieldsProps> = ({ ...props }) => (
-  <Input type="password" placeholder="Senha" {...props} />
+  <Input placeholder="Senha" {...props} />
 );
 
 const EmailInput: React.FC<FormDataFieldsProps> = ({ ...props }) => (
