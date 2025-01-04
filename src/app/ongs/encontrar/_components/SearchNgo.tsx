@@ -1,4 +1,4 @@
-import { Section } from "./Section";
+import { Section } from "@/components/Section";
 import { Button } from "@/components/Button";
 import { SearchNgoForm } from "./SearchNgoForm";
 import { NgoResponse } from "@/lib/schemas/ngo";
