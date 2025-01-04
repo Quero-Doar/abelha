@@ -20,8 +20,8 @@ import { HamburgerMenuIcon } from "./icons/HamburgerMenu";
 const contextMenu = {
   "/": "Início",
   "/sobre": "Sobre",
-  "/encontrar-ongs": "Encontrar ONGs",
-  "/recomendar-ongs": "Recomendar ONGs",
+  "/ongs/encontrar": "Encontrar ONGs",
+  "/ongs/recomendar": "Recomendar ONGs",
 };
 
 export const Header = () => {

@@ -7,20 +7,21 @@ type SearchParams = {
 };
 
 type Props = {
-  searchParams: SearchParams;
+  searchParams: Promise<SearchParams>;
 };
 
 // TODO Add pagination to SearchNgoResult component
 // TODO When it has internal server error page, add it here
 export default async function FindNgosPage({ searchParams }: Props) {
-  if (!searchParams.search) {
+  const params = await searchParams;
+  if (!params.search) {
     const { data } = await listNgos();
 
     return <SearchNgo ngos={data!.users} />;
   }
 
   const { data } = await searchNgos({
-    search: searchParams.search,
+    search: params.search,
     page: 1,
     limit: 9,
   });

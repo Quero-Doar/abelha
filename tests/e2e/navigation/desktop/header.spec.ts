@@ -3,7 +3,7 @@ import { expect } from "@playwright/test";
 
 import { test } from "@tests/fixtures";
 
-test.describe("Header Navigation", () => {
+test.describe("Header Navigation (Desktop)", () => {
   test("should navigate to different sections and keep the header visible", async ({
     page,
     apiMocks,
@@ -27,14 +27,25 @@ test.describe("Header Navigation", () => {
     await expect(page.getByText("Página de início")).toBeVisible();
 
     // Navigate to the Find Ngo page
+    await apiMocks.add({
+      route: "/api/ngos",
+      response: {
+        status: 200,
+        body: {
+          users: [],
+          totalPages: 1,
+        },
+      },
+    });
+
     await page.click("text=Encontrar ONGs");
-    await expect(page).toHaveURL("/encontrar-ongs");
+    await expect(page).toHaveURL("/ongs/encontrar");
     await expect(header).toBeVisible();
-    await expect(page.getByText("Página de encontrar ONGs")).toBeVisible();
+    await expect(page.getByText("Encontre aqui uma ONG para Recomendar")).toBeVisible();
 
     // Navigate to the Recommend Ngo page
     await page.click("text=Recomendar ONGs");
-    await expect(page).toHaveURL("/recomendar-ongs");
+    await expect(page).toHaveURL("/ongs/recomendar");
     await expect(header).toBeVisible();
     await expect(page.getByText("Página de recomendar ONGs")).toBeVisible();
 

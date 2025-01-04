@@ -29,18 +29,29 @@ test.describe("Header Navigation (Mobile)", () => {
     await expect(header).toBeVisible();
 
     // Navigate to the Find Ngo mobilePage
+    await apiMocks.add({
+      route: "/api/ngos",
+      response: {
+        status: 200,
+        body: {
+          users: [],
+          totalPages: 1,
+        },
+      },
+    });
+
     await mobilePage.click('[aria-label="Hamburger Trigger"]');
     await mobilePage.getByRole("link", { name: "Encontrar ONGs" }).click();
-    await expect(mobilePage).toHaveURL("/encontrar-ongs");
+    await expect(mobilePage).toHaveURL("/ongs/encontrar");
     await expect(
-      mobilePage.getByText("Página de encontrar ONGs")
+      mobilePage.getByText("Encontre aqui uma ONG para Recomendar")
     ).toBeVisible();
     await expect(header).toBeVisible();
 
     // Navigate to the Recommend Ngo mobilePage
     await mobilePage.click('[aria-label="Hamburger Trigger"]');
     await mobilePage.getByRole("link", { name: "Recomendar ONGs" }).click();
-    await expect(mobilePage).toHaveURL("/recomendar-ongs");
+    await expect(mobilePage).toHaveURL("/ongs/recomendar");
     await expect(
       mobilePage.getByText("Página de recomendar ONGs")
     ).toBeVisible();
