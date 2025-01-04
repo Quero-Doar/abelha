@@ -2,17 +2,27 @@ import { cn } from "@/lib/utils";
 import { Card, CardContent } from "./ui/card";
 
 import { Badge } from "./Badge";
-import { LikeIcon } from "./icons/Like";
 import { Tooltip } from "./Tooltip";
+import { LikeIcon } from "./icons/Like";
+import { NgoResponse } from "@/lib/schemas/ngo";
 
 type Props = {
-  categories: string[];
-  ngoName: string;
-  isLiked: boolean;
-  picture?: string;
+  ngos: NgoResponse[];
 };
 
-const NgoCardHeader: React.FC<Pick<Props, "picture" | "isLiked">> = ({
+export const NgoCards: React.FC<Props> = ({ ngos }) => (
+  <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+    {ngos.map(({ id, name, categories }) => (
+      <Card key={id} className="w-40 md:w-60">
+        <NgoCardHeader picture={undefined} isLiked={false} />
+
+        <NgoCardFooter name={name} categories={categories} />
+      </Card>
+    ))}
+  </div>
+);
+
+const NgoCardHeader: React.FC<{ isLiked: boolean; picture?: string }> = ({
   picture,
   isLiked,
 }) => (
@@ -35,33 +45,25 @@ const NgoCardHeader: React.FC<Pick<Props, "picture" | "isLiked">> = ({
   </CardContent>
 );
 
-const NgoCardFooter: React.FC<Pick<Props, "categories" | "ngoName">> = ({
-  ngoName,
+const NgoCardFooter: React.FC<Pick<NgoResponse, "categories" | "name">> = ({
+  name,
   categories,
 }) => (
   <CardContent className="bg-gray flex flex-col items-center justify-center space-y-2 p-2 md:p-4 border border-gray-darklight border-t-0 rounded-b-lg">
-    <span className="opacity-50 text-sm md:text-2xl">{ngoName}</span>
+    <span className="opacity-50 text-xs md:text-lg">{name}</span>
 
     <div className="flex space-x-2">
-      <Badge label={categories[0]} />
-      {categories.length > 1 && 
-        <Tooltip content={categories.slice(1).join(", ")}>
+      <Badge label={categories[0].name} />
+      {categories.length > 1 && (
+        <Tooltip
+          content={categories
+            .slice(1)
+            .map((item) => item.name)
+            .join(", ")}
+        >
           <Badge label={`+${categories.length - 1}`} />
         </Tooltip>
-      }
+      )}
     </div>
   </CardContent>
-);
-
-export const NgoCard: React.FC<Props> = ({
-  picture,
-  ngoName,
-  categories,
-  isLiked,
-}) => (
-  <Card className="w-40 md:w-60">
-    <NgoCardHeader picture={picture} isLiked={isLiked} />
-
-    <NgoCardFooter ngoName={ngoName} categories={categories} />
-  </Card>
 );
