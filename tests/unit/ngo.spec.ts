@@ -1,6 +1,5 @@
 import { describe, it, expect } from "vitest";
-
-import { divideNgos } from "@/components/BubbleCarousel";
+import { divideNgos } from "@/components/NgoCarousel";
 
 describe("divideNgo()", () => {
   it("should return empty when array is empty", () => {
