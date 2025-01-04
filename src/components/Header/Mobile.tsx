@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 import {
   Drawer,
@@ -18,7 +18,6 @@ import { Button } from "../Button";
 import { CloseIcon } from "../icons/Close";
 import { LogoImage } from "../images/Logo";
 import { HamburgerMenuIcon } from "../icons/HamburgerMenu";
-import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
 type Props = {
   contextMenu: Record<string, string>;
@@ -29,7 +28,7 @@ export const HeaderMobile: React.FC<Props> = ({ contextMenu }) => {
 
   return (
     <Drawer direction="right">
-      <div className="text-sm shadow-lg px-8 p-4 flex justify-between items-center w-full lg:hidden">
+      <div className="text-xs shadow-lg px-8 p-4 flex justify-between items-center w-full lg:hidden">
         <Link href="/">
           <LogoImage />
         </Link>
@@ -67,7 +66,7 @@ const ContentContextMenu: React.FC<Props & { pathname: string }> = ({
   contextMenu,
   pathname,
 }) => (
-  <div className="flex flex-col text-sm text-blue-dark font-medium space-y-4">
+  <div className="flex flex-col text-xs text-blue-dark font-medium space-y-4">
     <DrawerClose asChild>
       <Link href="/">
         <p
@@ -105,13 +104,13 @@ const ContentContextMenu: React.FC<Props & { pathname: string }> = ({
 const ContentFooter: React.FC = () => (
   <DrawerFooter className="flex flex-col space-y-4 items-center">
     <DrawerClose asChild>
-      <Link href="/cadastrar">
+      <Link href="/cadastrar" className="w-full">
         <Button label="Criar Conta" size="sm" className="w-full p-5" />
       </Link>
     </DrawerClose>
 
     <DrawerClose asChild>
-      <Link href="/login">
+      <Link href="/login" className="w-full">
         <Button
           label="Entrar"
           variant="outline"

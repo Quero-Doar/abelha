@@ -18,7 +18,7 @@ test.describe("Header Navigation (Mobile)", () => {
     await mobilePage.click('[aria-label="Hamburger Trigger"]');
     await mobilePage.getByRole("link", { name: "Sobre" }).click();
     await expect(mobilePage).toHaveURL("/sobre");
-    await expect(mobilePage.getByText("Página Sobre")).toBeVisible();
+    await expect(mobilePage.getByText("Quem SomosThe largest")).toBeVisible();
     await expect(header).toBeVisible();
 
     // Go back to the Home mobilePage
@@ -32,14 +32,18 @@ test.describe("Header Navigation (Mobile)", () => {
     await mobilePage.click('[aria-label="Hamburger Trigger"]');
     await mobilePage.getByRole("link", { name: "Encontrar ONGs" }).click();
     await expect(mobilePage).toHaveURL("/encontrar-ongs");
-    await expect(mobilePage.getByText("Página de encontrar ONGs")).toBeVisible();
+    await expect(
+      mobilePage.getByText("Página de encontrar ONGs")
+    ).toBeVisible();
     await expect(header).toBeVisible();
 
     // Navigate to the Recommend Ngo mobilePage
     await mobilePage.click('[aria-label="Hamburger Trigger"]');
     await mobilePage.getByRole("link", { name: "Recomendar ONGs" }).click();
     await expect(mobilePage).toHaveURL("/recomendar-ongs");
-    await expect(mobilePage.getByText("Página de recomendar ONGs")).toBeVisible();
+    await expect(
+      mobilePage.getByText("Página de recomendar ONGs")
+    ).toBeVisible();
     await expect(header).toBeVisible();
 
     // Navigate to the Sign up mobilePage

@@ -18,7 +18,7 @@ test.describe("Header Navigation", () => {
     await page.click("text=Sobre");
     await expect(page).toHaveURL("/sobre");
     await expect(header).toBeVisible();
-    await expect(page.getByText("Página Sobre")).toBeVisible();
+    await expect(page.getByText("Quem SomosThe largest")).toBeVisible();
 
     // Go back to the Home page
     await page.click('[aria-label="Logo Quero Doar"]');
