@@ -1,8 +1,8 @@
 import { cn } from "@/lib/utils";
 
-type Props = React.SVGProps<SVGSVGElement>;
+import { SvgProps } from "@/lib/props";
 
-export const EyeOpen: React.FC<Props> = ({ className, ...props }) => (
+export const EyeOpen: React.FC<SvgProps> = ({ className, ...props }) => (
   <svg
     viewBox="0 0 15 15"
     xmlns="http://www.w3.org/2000/svg"

@@ -11,3 +11,5 @@ export type FormItems = {
   label: string;
   data?: Record<string, string>;
 };
+
+export type SvgProps = React.SVGProps<SVGSVGElement>;
