@@ -5,7 +5,6 @@ type Props = React.SVGProps<SVGSVGElement>;
 export const ChatIcon: React.FC<Props> = ({ className, ...props }) => (
   <svg
     viewBox="0 0 85 74"
-    fill="none"
     xmlns="http://www.w3.org/2000/svg"
     className={cn("w-6 h-6", className)}
     {...props}
