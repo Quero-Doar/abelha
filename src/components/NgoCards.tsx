@@ -11,7 +11,7 @@ type Props = {
 };
 
 export const NgoCards: React.FC<Props> = ({ ngos }) => (
-  <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+  <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 place-self-center">
     {ngos.map(({ id, name, categories }) => (
       <Card key={id} className="w-40 md:w-52">
         <NgoCardHeader picture={undefined} isLiked={false} />
@@ -50,7 +50,11 @@ const NgoCardFooter: React.FC<Pick<NgoResponse, "categories" | "name">> = ({
   categories,
 }) => (
   <CardContent className="bg-gray flex flex-col items-center justify-center space-y-2 p-2 md:p-4 border border-gray-darklight border-t-0 rounded-b-lg">
-    <span className="opacity-50 text-xs md:text-lg">{name}</span>
+    <Tooltip content={name}>
+      <p className="opacity-50 text-center text-xs md:text-lg truncate w-28 md:w-32">
+        {name}
+      </p>
+    </Tooltip>
 
     <div className="flex space-x-2">
       <Badge label={categories[0].name} />

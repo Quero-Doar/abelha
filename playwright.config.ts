@@ -58,5 +58,7 @@ export default defineConfig({
     command: "pnpm build && pnpm start",
     port: 3000,
     env: { SERVICE_ENV: "test" },
+    stdout: "pipe",
+    stderr: "pipe",
   },
 });
