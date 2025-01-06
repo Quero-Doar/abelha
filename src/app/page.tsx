@@ -51,38 +51,38 @@ export default async function HomePage() {
           </p>
         </div>
 
-        <div className="flex items-center justify-center flex-col md:flex-row md:items-start md:justify-around pt-5">
-          <div className="flex items-center justify-center text-center flex-col md:max-w-72">
-            <KeyboardIcon className="w-20 h-20 flex self-center" />
+        <div className="flex items-center justify-center flex-col md:flex-row md:items-start md:justify-around">
+          <div className="flex items-center justify-start text-center flex-col md:max-w-72 space-y-5">
+            <KeyboardIcon className="w-20 h-20 flex" />
 
             <div>
               <h1 className="text-xl md:text-2xl font-semibold opacity-70">
                 Faça uma pesquisa
               </h1>
 
-              <p className="text-sm md:text-md font-thin opacity-70 text-center mt-5">
+              <p className="text-sm md:text-md font-thin opacity-70 text-center">
                 Digite o nome ou categoria da ONG no campo de pesquisa e clique
                 em buscar
               </p>
             </div>
           </div>
 
-          <div className="flex items-center justify-center text-center flex-col md:max-w-72 my-5">
-            <SearchNgoIcon className="w-20 h-20 flex self-center" />
+          <div className="flex items-center justify-start text-center flex-col md:max-w-72 space-y-5">
+            <SearchNgoIcon className="w-20 h-20 flex" />
 
             <div>
               <h1 className="text-xl md:text-2xl font-semibold opacity-70">
                 Encontre uma ONG
               </h1>
 
-              <p className="text-sm md:text-md font-thin opacity-70 text-center mt-5">
+              <p className="text-sm md:text-md font-thin opacity-70 text-center">
                 Escolha a ONG que quer recomendar
               </p>
             </div>
           </div>
 
-          <div className="flex items-center justify-center text-center flex-col md:max-w-72">
-            <ChatIcon className="w-20 h-20 flex self-center" />
+          <div className="flex items-center justify-start text-center flex-col md:max-w-72 space-y-5">
+            <ChatIcon className="w-20 h-20 flex" />
 
             <div>
               <h1 className="text-xl md:text-2xl font-semibold opacity-70">
@@ -136,10 +136,10 @@ export default async function HomePage() {
           </p>
         </div>
 
-        <div className="flex items-center justify-center flex-col lg:flex-row mt-10">
-          <Link href="/ongs/recomendar" className="mb-5 lg:mr-10 lg:mb-0">
+        <div className="flex items-center justify-center flex-col lg:flex-row mt-10 place-self-center w-2/5 space-x-0 space-y-5 lg:space-x-5 lg:space-y-0">
+          <Link href="/ongs/recomendar" className="w-full lg:w-auto">
             <Button
-              className="self-center"
+              className="w-full"
               label="Recomendar"
               type="button"
               size="lg"
@@ -147,9 +147,9 @@ export default async function HomePage() {
             />
           </Link>
 
-          <Link href="/cadastrar">
+          <Link href="/cadastrar" className="w-full lg:w-auto">
             <Button
-              className="self-center"
+              className="w-full"
               label="Cadastrar"
               type="button"
               size="lg"
@@ -174,3 +174,5 @@ export default async function HomePage() {
     </div>
   );
 }
+
+export const dynamic = "force-dynamic";

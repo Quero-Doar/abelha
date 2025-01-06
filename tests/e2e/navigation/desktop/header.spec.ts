@@ -8,6 +8,17 @@ test.describe("Header Navigation (Desktop)", () => {
     page,
     apiMocks,
   }) => {
+    await apiMocks.add({
+      route: "/api/ngos",
+      response: {
+        status: 200,
+        body: {
+          users: [],
+          totalPages: 1,
+        },
+      },
+    });
+
     await page.goto("/");
 
     // Verifies if the header is visible
@@ -21,10 +32,21 @@ test.describe("Header Navigation (Desktop)", () => {
     await expect(page.getByText("Quem SomosThe largest")).toBeVisible();
 
     // Go back to the Home page
+    await apiMocks.add({
+      route: "/api/ngos",
+      response: {
+        status: 200,
+        body: {
+          users: [],
+          totalPages: 1,
+        },
+      },
+    });
+
     await page.click('[aria-label="Logo Quero Doar"]');
     await expect(page).toHaveURL("/");
     await expect(header).toBeVisible();
-    await expect(page.getByText("Página de início")).toBeVisible();
+    await expect(page.getByText("Conheça instituições pela visão do doador!")).toBeVisible();
 
     // Navigate to the Find Ngo page
     await apiMocks.add({
