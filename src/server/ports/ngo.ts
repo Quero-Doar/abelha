@@ -50,7 +50,7 @@ export const searchNgos = serverRequest({
         response.status
       );
     }
-    const { data } = await response.json();
+    const data = await response.json();
 
     return ListNgosPaginatedResponse.parse(data);
   },
@@ -81,7 +81,7 @@ export const listNgos = serverRequest({
       );
     }
 
-    const { data } = await response.json();
+    const data = await response.json();
 
     return ListNgosPaginatedResponse.parse(data);
   },
