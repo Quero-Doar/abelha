@@ -58,14 +58,6 @@ const handle = async (request: NextRequest) => {
   };
 
   const response = state.mockedResponse(apiRequest);
-  if (request.method == "GET") {
-    return NextResponse.json(
-      { data: response.body },
-      {
-        status: response.status || 200,
-      }
-    );
-  }
 
   return NextResponse.json(response.body || {}, {
     status: response.status || 200,

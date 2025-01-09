@@ -11,7 +11,6 @@ export const getCategoriesObject = serverRequest({
     const response = await fetch(url, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
-      cache: "force-cache",
     });
 
     if (!response.ok) {
@@ -21,7 +20,7 @@ export const getCategoriesObject = serverRequest({
       );
     }
 
-    const { data } = await response.json();
+    const data = await response.json();
     return CategoriesObject.parse(data);
   },
 });
