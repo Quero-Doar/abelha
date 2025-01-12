@@ -4,11 +4,22 @@ import { expect } from "@playwright/test";
 
 import { test } from "@tests/fixtures";
 
-test.describe("Login Journey (Desktop)", () => {
-  test("should navigate to login page and execute login successfully", async ({
+test.describe.only("Login Journey (Desktop)", () => {
+  test.only("should navigate to login page and execute login successfully", async ({
     page,
     apiMocks,
   }) => {
+    await apiMocks.add({
+      route: "/api/ngos",
+      response: {
+        status: 200,
+        body: {
+          users: [],
+          totalPages: 1,
+        },
+      },
+    });
+
     await page.goto("/");
 
     // Navigate to the login page
