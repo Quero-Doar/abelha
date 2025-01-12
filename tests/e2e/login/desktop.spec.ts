@@ -4,8 +4,8 @@ import { expect } from "@playwright/test";
 
 import { test } from "@tests/fixtures";
 
-test.describe.only("Login Journey (Desktop)", () => {
-  test.only("should navigate to login page and execute login successfully", async ({
+test.describe("Login Journey (Desktop)", () => {
+  test("should navigate to login page and execute login successfully", async ({
     page,
     apiMocks,
   }) => {
