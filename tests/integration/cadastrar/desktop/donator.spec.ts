@@ -178,6 +178,17 @@ test.describe("SignUp Page (Donator) - Integration", () => {
       },
     });
 
+    await apiMocks.add({
+      route: "/api/ngos",
+      response: {
+        status: 200,
+        body: {
+          users: [],
+          totalPages: 1,
+        },
+      },
+    });
+
     await submitButton.click();
 
     await expect(page).toHaveURL("/");

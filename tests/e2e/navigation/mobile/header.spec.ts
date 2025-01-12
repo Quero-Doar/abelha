@@ -8,6 +8,17 @@ test.describe("Header Navigation (Mobile)", () => {
     mobilePage,
     apiMocks,
   }) => {
+    await apiMocks.add({
+      route: "/api/ngos",
+      response: {
+        status: 200,
+        body: {
+          users: [],
+          totalPages: 1,
+        },
+      },
+    });
+
     await mobilePage.goto("/");
 
     // Verifies if the header is visible
@@ -22,10 +33,21 @@ test.describe("Header Navigation (Mobile)", () => {
     await expect(header).toBeVisible();
 
     // Go back to the Home mobilePage
+    await apiMocks.add({
+      route: "/api/ngos",
+      response: {
+        status: 200,
+        body: {
+          users: [],
+          totalPages: 1,
+        },
+      },
+    });
+
     await mobilePage.click('[aria-label="Hamburger Trigger"]');
     await mobilePage.getByRole("link", { name: "Início" }).click();
     await expect(mobilePage).toHaveURL("/");
-    await expect(mobilePage.getByText("Página de início")).toBeVisible();
+    await expect(mobilePage.getByText("Conheça instituições pela visão do doador!")).toBeVisible();
     await expect(header).toBeVisible();
 
     // Navigate to the Find Ngo mobilePage
