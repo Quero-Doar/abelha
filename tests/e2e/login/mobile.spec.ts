@@ -9,6 +9,13 @@ test.describe("Login Journey (Mobile)", () => {
     mobilePage,
     apiMocks,
   }) => {
+    await apiMocks.add({
+      route: "/api/ngos",
+      response: {
+        status: 200,
+        body: { users: [], totalPages: 1 },
+      },
+    });
     await mobilePage.goto("/");
 
     // Navigate to the Sign in mobilePage

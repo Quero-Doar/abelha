@@ -1,3 +1,5 @@
+"use client";
+
 import { z } from "zod";
 import type { Meta, StoryObj } from "@storybook/react";
 
@@ -6,6 +8,7 @@ import { Input } from "@/components/Input";
 import { FormDataFieldsProps, FormItems } from "@/lib/props";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { FormConfig } from "@/lib/types";
 
 const NameInput: React.FC<FormDataFieldsProps> = ({ ...props }) => (
   <Input id="name" placeholder="Rebeca Gusmão" {...props} />
@@ -18,23 +21,6 @@ const EmailInput: React.FC<FormDataFieldsProps> = ({ ...props }) => (
 const PasswordInput: React.FC<FormDataFieldsProps> = ({ ...props }) => (
   <Input type="password" placeholder="Senha" {...props} />
 );
-
-const formItems: Record<string, FormItems> = {
-  name: {
-    ItemComponent: NameInput,
-    label: "Nome",
-  },
-
-  email: {
-    ItemComponent: EmailInput,
-    label: "Email",
-  },
-
-  password: {
-    ItemComponent: PasswordInput,
-    label: "Senha",
-  },
-};
 
 const Schema = z.object({
   name: z.string(),
@@ -57,26 +43,43 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
+    config: {} as any,
+    onSubmit: () => {},
     buttonLabel: "Criar Conta",
-    items: formItems,
-    form: "" as unknown as any,
   },
   render: () => {
-    const form = useForm<Schema>({
-      resolver: zodResolver(Schema),
-      defaultValues: {
-        name: "",
-        email: "",
-        password: "",
+    const config: FormConfig<typeof Schema> = {
+      form: useForm<Schema>({
+        resolver: zodResolver(Schema),
+        defaultValues: {
+          name: "",
+          email: "",
+          password: "",
+        },
+      }),
+      items: {
+        name: {
+          Component: NameInput,
+          label: "Nome",
+        },
+
+        email: {
+          Component: EmailInput,
+          label: "Email",
+        },
+
+        password: {
+          Component: PasswordInput,
+          label: "Senha",
+        },
       },
-    });
+    };
 
     return (
       <Form
-        form={form}
-        items={formItems}
-        buttonLabel="Criar Conta"
+        config={config}
         onSubmit={() => alert("Conta criada!")}
+        buttonLabel="Criar Conta"
       />
     );
   },

@@ -10,7 +10,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-  Select as ShadSelect,
+  SelectRoot,
 } from "./ui/select";
 
 type Props = {
@@ -32,13 +32,15 @@ export const Select: React.FC<Props> = ({
     <div className="space-y-1">
       <Label className={cn({ hidden: !label })}>{label}</Label>
 
-      <ShadSelect
+      <SelectRoot
         onOpenChange={() => setIsOpen((prev) => !prev)}
         onValueChange={onValueChange}
       >
         <SelectTrigger className="h-full lg:w-80" isOpen={isOpen}>
           <SelectValue
-            placeholder={<span className="opacity-20 text-xs">{placeholder}</span>}
+            placeholder={
+              <span className="opacity-20 text-xs">{placeholder}</span>
+            }
           />
         </SelectTrigger>
 
@@ -51,7 +53,7 @@ export const Select: React.FC<Props> = ({
             ))}
           </SelectGroup>
         </SelectContent>
-      </ShadSelect>
+      </SelectRoot>
     </div>
   );
 };

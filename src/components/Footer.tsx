@@ -1,9 +1,10 @@
-import { Button } from "../Button";
-import { LogoImage } from "../images/Logo";
-import { FacebookIcon } from "../icons/Facebook";
-import { InstagramIcon } from "../icons/Instagram";
-import { LinkedinIcon } from "../icons/Linkedin";
 import Link from "next/link";
+
+import { Button } from "./Button";
+import { LogoImage } from "./images/Logo";
+import { FacebookIcon } from "./icons/Facebook";
+import { LinkedinIcon } from "./icons/Linkedin";
+import { InstagramIcon } from "./icons/Instagram";
 
 export const Footer: React.FC = () => {
   return (
