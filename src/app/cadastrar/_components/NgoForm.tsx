@@ -1,54 +1,61 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
+import { useForm, UseFormReturn } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { FormItems } from "@/lib/props";
 import { Form } from "@/components/Form";
-import { CreateNgoPayload } from "@/lib/schemas/ngo";
-
+import { FormConfig } from "@/lib/types";
 import { toast } from "@/hooks/use-toast";
-import { ngoFormItems } from "./form-config/ngo";
 import { newNgo } from "@/server/actions/ngo/create";
+import { CreateNgoPayload } from "@/lib/schemas/ngo";
+import { NgoNameInput } from "./form-items/ngo/NgoNameInput";
+import { NgoEmailInput } from "./form-items/ngo/NgoEmailInput";
+import { NgoPasswordInput } from "./form-items/ngo/NgoPasswordInput";
+import { NgoCategorySelect } from "./form-items/ngo/NgoCategorySelect";
+import { ServerResponse } from "@/server/responses";
+import { useRouter } from "next/router";
 
 type Props = {
-  categories: Record<string, string>;
+  response: ServerResponse<Record<string, string>>;
 };
 
-const getFormItems = (
-  formItems: Record<string, FormItems>,
-  categories: Record<string, string>
-) => ({
-  ...formItems,
-  category: {
-    ...formItems.category,
-    data: categories,
-  },
-});
-
-export const NgoForm: React.FC<Props> = ({ categories }) => {
+export const NgoForm: React.FC<Props> = ({ response }) => {
   const router = useRouter();
-  const form = useForm<CreateNgoPayload>({
-    resolver: zodResolver(CreateNgoPayload),
-    defaultValues: {
-      name: "",
-      category: "",
-      email: "",
-      password: "",
+  const config: FormConfig<typeof CreateNgoPayload> = {
+    form: useForm<CreateNgoPayload>({
+      resolver: zodResolver(CreateNgoPayload),
+      defaultValues: {
+        name: "",
+        category: "",
+        email: "",
+        password: "",
+      },
+    }),
+    items: {
+      category: {
+        Component: NgoCategorySelect,
+        label: "Categorias",
+        input: { response },
+      },
+      email: {
+        Component: NgoEmailInput,
+        label: "E-mail",
+      },
+      name: {
+        Component: NgoNameInput,
+        label: "Nome",
+      },
+      password: {
+        Component: NgoPasswordInput,
+        label: "Senha",
+      },
     },
-  });
+  };
 
-  const isCategoriesEmpty = Object.keys(categories).length;
-  if (!isCategoriesEmpty) {
-    toast({
-      title: "Erro ao carregar categorias",
-      description: "Tente novamente mais tarde",
-      variant: "destructive",
-    });
-  }
-
-  const onSubmit = async (data: any) => {
+  const handleSubmit = async (
+    data: CreateNgoPayload,
+    form: UseFormReturn<CreateNgoPayload>
+  ) => {
     const response = await newNgo(data);
     if (response.error && response.error.status === 409) {
       form.setError("email", { message: response.error.message });
@@ -65,11 +72,6 @@ export const NgoForm: React.FC<Props> = ({ categories }) => {
   };
 
   return (
-    <Form
-      items={getFormItems(ngoFormItems, categories)}
-      buttonLabel="Criar Conta"
-      form={form}
-      onSubmit={onSubmit}
-    />
+    <Form config={config} buttonLabel="Criar Conta" onSubmit={handleSubmit} />
   );
 };

@@ -1,32 +1,55 @@
 "use client";
 
-import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm, UseFormReturn } from "react-hook-form";
 
 import { Form } from "@/components/Form";
 
-import { donatorFormItems } from "./form-config/donator";
-import { CreateDonatorPayload } from "@/lib/schemas/donator";
-import { newDonator } from "@/server/actions/donator/create";
+import { FormConfig } from "@/lib/types";
 import { toast } from "@/hooks/use-toast";
+import { newDonator } from "@/server/actions/donator/create";
+import { CreateDonatorPayload } from "@/lib/schemas/donator";
+import { DonatorNameInput } from "./form-items/donator/DonatorNameInput";
+import { DonatorEmailInput } from "./form-items/donator/DonatorEmailInput";
+import { DonatorPasswordInput } from "./form-items/donator/DonatorPasswordInput";
+import { useRouter } from "next/router";
 
 export const DonatorForm: React.FC = () => {
   const router = useRouter();
-  const form = useForm<CreateDonatorPayload>({
-    resolver: zodResolver(CreateDonatorPayload),
-    defaultValues: {
-      name: "",
-      email: "",
-      password: "",
-    },
-  });
+  const config: FormConfig<typeof CreateDonatorPayload> = {
+    form: useForm<CreateDonatorPayload>({
+      resolver: zodResolver(CreateDonatorPayload),
+      defaultValues: {
+        name: "",
+        email: "",
+        password: "",
+      },
+    }),
 
-  const onSubmit = async (data: any) => {
+    items: {
+      name: {
+        Component: DonatorNameInput,
+        label: "Nome",
+      },
+      email: {
+        Component: DonatorEmailInput,
+        label: "E-mail",
+      },
+      password: {
+        Component: DonatorPasswordInput,
+        label: "Senha",
+      },
+    },
+  };
+
+  const handleSubmit = async (
+    data: any,
+    form: UseFormReturn<CreateDonatorPayload, any, CreateDonatorPayload>
+  ) => {
     const response = await newDonator(data);
+
     if (response.error && response.error.status === 409) {
-      form.setError("email", { message: response.error.message });
-      return;
+      return form.setError("email", { message: response.error.message });
     } else if (response.error) {
       return toast({
         variant: "destructive",
@@ -39,11 +62,6 @@ export const DonatorForm: React.FC = () => {
   };
 
   return (
-    <Form
-      items={donatorFormItems}
-      buttonLabel="Criar Conta"
-      form={form}
-      onSubmit={onSubmit}
-    />
+    <Form config={config} buttonLabel="Criar Conta" onSubmit={handleSubmit} />
   );
 };

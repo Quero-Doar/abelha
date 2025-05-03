@@ -5,6 +5,7 @@ import { TabsContent } from "@/components/ui/tabs";
 import { DonatorForm } from "./_components/DonatorForm";
 import { RightSideContent } from "./_components/RightSideContent";
 import { getCategoriesObject } from "@/server/ports/category";
+import { use } from "react";
 
 const tabs: Record<string, string> = {
   ngo: "Sou ONG",
@@ -16,8 +17,8 @@ const leftSideContent: Record<string, React.ReactNode> = {
   ngo: <Content type="ngo" />,
 };
 
-export default async function SignUpPage() {
-  const { data } = await getCategoriesObject();
+export default function SignUpPage() {
+  const response = use(getCategoriesObject());
 
   return (
     <Tab
@@ -32,10 +33,8 @@ export default async function SignUpPage() {
       </TabsContent>
 
       <TabsContent value="ngo">
-        <NgoForm categories={data || {}} />
+        <NgoForm response={response} />
       </TabsContent>
     </Tab>
   );
 }
-
-export const dynamic = "force-dynamic";

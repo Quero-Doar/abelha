@@ -170,7 +170,15 @@ test.describe("SignUp Page (Donator) - Integration", () => {
     await emailInput.fill("johndoe@nobody.com");
     await passwordInput.fill("StrongPassword@1234");
 
-    apiMocks.add({
+    await apiMocks.add({
+      route: "/api/ngos",
+      response: {
+        status: 200,
+        body: { users: [], totalPages: 1 },
+      },
+    });
+
+    await apiMocks.add({
       route: "/v1/donators",
       response: {
         status: 200,

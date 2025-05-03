@@ -9,6 +9,14 @@ test.describe("Login Journey (Desktop)", () => {
     page,
     apiMocks,
   }) => {
+    await apiMocks.add({
+      route: "/api/ngos",
+      response: {
+        status: 200,
+        body: { users: [], totalPages: 1 },
+      },
+    });
+
     await page.goto("/");
 
     // Navigate to the login page

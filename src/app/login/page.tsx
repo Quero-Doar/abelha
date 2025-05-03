@@ -10,7 +10,9 @@ export default function LoginPage() {
           Login
         </h1>
 
-        <LoginForm />
+        <div className="place-self-center lg:w-96 w-72">
+          <LoginForm />
+        </div>
       </div>
     </div>
   );
